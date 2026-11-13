@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Document | Document Tracker</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div>
+            <h1>Document Tracker</h1>
+            <p>Update your document information</p>
+        </div>
+
+        <div class="header-icon">📁</div>
+    </header>
+
+    <main class="container">
+
+        <section class="section-box edit-section">
+
+            <h2>Edit Document</h2>
+            <p>Change the information below and save your updates.</p>
+
+            <form method="POST" class="document-form">
+
+                <div class="form-group">
+                    <label>Document Name *</label>
+                    <input
+                        type="text"
+                        name="document_name"
+                        value="{{ document.document_name }}"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Document Type *</label>
+
+                    <select name="document_type" required>
+                        <option value="Identity"
+                            {% if document.document_type == "Identity" %}selected{% endif %}>
+                            Identity
+                        </option>
+
+                        <option value="Education"
+                            {% if document.document_type == "Education" %}selected{% endif %}>
+                            Education
+                        </option>
+
+                        <option value="Travel"
+                            {% if document.document_type == "Travel" %}selected{% endif %}>
+                            Travel
+                        </option>
+
+                        <option value="Vehicle"
+                            {% if document.document_type == "Vehicle" %}selected{% endif %}>
+                            Vehicle
+                        </option>
+
+                        <option value="Insurance"
+                            {% if document.document_type == "Insurance" %}selected{% endif %}>
+                            Insurance
+                        </option>
+
+                        <option value="Other"
+                            {% if document.document_type == "Other" %}selected{% endif %}>
+                            Other
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Issue Date</label>
+                    <input
+                        type="date"
+                        name="issue_date"
+                        value="{{ document.issue_date or '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Expiry Date *</label>
+                    <input
+                        type="date"
+                        name="expiry_date"
+                        value="{{ document.expiry_date }}"
+                        required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Notes</label>
+                    <textarea
+                        name="notes"
+                        placeholder="Enter additional notes">{{ document.notes or '' }}</textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="add-button">
+                        Save Changes
+                    </button>
+
+                    <a href="{{ url_for('index') }}" class="cancel-button">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
